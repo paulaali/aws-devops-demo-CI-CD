@@ -1,0 +1,43 @@
+
+name: Deploy Website to AWS
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'index.html'
+      - '.github/workflows/deploy.yml'
+
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy website
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - name: Upload website to S3
+        run: |
+          aws s3 cp index.html \
+            s3://aws-devops-demo-043699392020-demo/index.html \
+            --content-type text/html
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id E1I8MA6W4TM1MW \
+            --paths "/*"
