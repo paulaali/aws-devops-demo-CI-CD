@@ -1,0 +1,20 @@
+
+# Terraform working files
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+crash.log
+
+# Local Terraform variables
+*.tfvars
+*.tfvars.json
+
+# Secrets
+.env
+.env.*
+
+# Windows files
+Thumbs.db
+.DS_Store

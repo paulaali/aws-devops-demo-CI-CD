@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1f3a">
+    <title>AWS Student Community Day | Session 3</title>
+
+    <style>
+        :root {
+            --navy: #0b1f3a;
+            --orange: #ff9900;
+            --white: #ffffff;
+            --muted: #d7e2ef;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(ellipse at 90% 10%, rgba(255,153,0,0.12), transparent 30%),
+                linear-gradient(135deg, #08182d, #0b1f3a 60%, #102d4d);
+            color: var(--white);
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        .page {
+            min-height: 100vh;
+            max-width: 1600px;
+            margin: auto;
+            padding: 0 7%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* HEADER */
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .brand-mark {
+            width: 44px;
+            height: 44px;
+            background: var(--orange);
+            color: var(--navy);
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 13px;
+        }
+
+        .brand-name {
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            line-height: 1.5;
+        }
+
+        .session-tag {
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 30px;
+            padding: 12px 20px;
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        /* MAIN SECTION */
+
+        .hero {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 50px;
+            padding: 55px 0 70px;
+        }
+
+        .eyebrow {
+            color: var(--orange);
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            font-size: clamp(48px, 6vw, 82px);
+            line-height: 1.02;
+            letter-spacing: -4px;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: var(--orange);
+        }
+
+        .intro {
+            max-width: 560px;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 2;
+        }
+
+        .session-name {
+            margin-top: 35px;
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        /* RIGHT SIDE DESIGN */
+
+        .visual {
+            min-height: 420px;
+            display: grid;
+            place-items: center;
+            position: relative;
+        }
+
+        .orbit {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 50%;
+            box-shadow:
+                0 0 0 35px rgba(255,255,255,0.025),
+                0 0 0 70px rgba(255,255,255,0.02);
+        }
+
+        .glass-card {
+            position: relative;
+            width: 320px;
+            padding: 35px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 25px;
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,0.15),
+                rgba(255,255,255,0.04)
+            );
+            box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+            transform: rotate(2deg);
+            backdrop-filter: blur(10px);
+        }
+
+        .cloud-icon {
+            width: 75px;
+            height: 75px;
+            display: grid;
+            place-items: center;
+            background: var(--orange);
+            color: var(--navy);
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 19px;
+            margin-bottom: 28px;
+        }
+
+        .glass-card h2 {
+            font-size: 25px;
+            line-height: 1.4;
+            margin-bottom: 18px;
+        }
+
+        .glass-card p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .orange-line {
+            width: 55px;
+            height: 4px;
+            border-radius: 5px;
+            background: var(--orange);
+            margin-top: 25px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 25px 0;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            color: #9bb0c9;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        /* MOBILE RESPONSIVENESS */
+
+        @media (max-width: 760px) {
+            .page {
+                padding: 0 22px;
+            }
+
+            .header {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .brand-name {
+                font-size: 10px;
+            }
+
+            .session-tag {
+                font-size: 9px;
+                padding: 9px 12px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                padding: 45px 0;
+            }
+
+            h1 {
+                font-size: 48px;
+                letter-spacing: -2px;
+            }
+
+            .visual {
+                min-height: 320px;
+            }
+
+            .orbit {
+                width: 260px;
+                height: 260px;
+            }
+
+            .glass-card {
+                width: 280px;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <header class="header">
+
+            <div class="brand">
+                <div class="brand-mark">AWS</div>
+
+                <div class="brand-name">
+                    AWS STUDENT<br>
+                    COMMUNITY DAY
+                </div>
+            </div>
+
+            <div class="session-tag">
+                PRE-EVENT | SESSION 3
+            </div>
+
+        </header>
+
+        <main class="hero">
+
+            <section class="hero-content">
+
+                <p class="eyebrow">THE JOURNEY STARTS HERE</p>
+
+                <h1>
+                    Welcome to<br>
+                    <span>AWS Student</span><br>
+                    Community Day
+                </h1>
+
+                <p class="intro">
+                    You're part of a community of curious minds,
+                    builders and future cloud professionals.
+                    Get ready to learn, connect and explore
+                    what's possible with AWS.
+                </p>
+
+                <p class="session-name">
+                    Pre-Event Session 3
+                </p>
+
+            </section>
+
+            <section class="visual">
+
+                <div class="orbit"></div>
+
+                <div class="glass-card">
+
+                    <div class="cloud-icon">AWS</div>
+
+                    <h2>
+                        Learn. Connect.<br>
+                        Build.
+                    </h2>
+
+                    <p>
+                        One community. New ideas.
+                        Bigger possibilities in the cloud.
+                    </p>
+
+                    <div class="orange-line"></div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer class="footer">
+            <span>AWS STUDENT COMMUNITY DAY</span>
+            <span>PRE-EVENT SESSION 3</span>
+        </footer>
+
+    </div>
+
+</body>
+</html>
