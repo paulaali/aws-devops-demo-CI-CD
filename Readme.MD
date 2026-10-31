@@ -1,67 +1,65 @@
-# ☁️ AWS Infrastructure as Code & CI/CD Pipeline
+# AWS Infrastructure as Code & CI/CD Pipeline
 
-\<div align="center">
+## AWS DevOps Demo
 
-# AWS DevOps Demo
+**Automating AWS Infrastructure and Website Deployment with Terraform & GitHub Actions**
 
-### Automating AWS Infrastructure and Website Deployment with Terraform & GitHub Actions
+**Learn. Build. Automate. Deploy.**
 
-**Learn. Build. Automate. Deploy**
-
-\<br/>
-
-**A practical AWS DevOps project for the AWS Student Community Day Pre-Event Session 3.**
-
-\</div>
+*A practical AWS DevOps project for the AWS Student Community Day Pre-Event Session 3.*
 
 ---
 
-## 📌 About the Project
+## About the Project
 
-This project demonstrates how to provision cloud infrastructure using **Infrastructure as Code (IaC)** and automate application deployment using a **CI/CD pipeline**.
+This project demonstrates how to provision cloud infrastructure using **Infrastructure as Code (IaC)** and automate application deployment through a **CI/CD pipeline**.
 
-We build a static website, provision its AWS infrastructure with Terraform, and configure GitHub Actions to automate deployments whenever changes are pushed to the repository.
+We build a static website, provision its AWS infrastructure using Terraform, and configure GitHub Actions to automate deployments whenever changes are pushed to the repository.
 
-The project also demonstrates secure authentication between GitHub Actions and AWS using OpenID Connect (OIDC).
+The project also demonstrates secure authentication between GitHub Actions and AWS using OpenID Connect (OIDC), alongside infrastructure security scanning with Checkov.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
-| Technology | Purpose                          |
-| ---------- | -------------------------------- |
-|            | Cloud infrastructure             |
-|            | Infrastructure as Code           |
-|            | Website storage                  |
-|            | Content delivery                 |
-|            | CI/CD automation                 |
-|            | Secure AWS authentication        |
-|            | Infrastructure security scanning |
-|            | Website development              |
-|            | Version control                  |
+| Technology | Purpose |
+|---|---|
+| ![AWS](https://img.shields.io/badge/Amazon_AWS-232F3E?logo=amazonwebservices&logoColor=white) | Cloud infrastructure |
+| ![Terraform](https://img.shields.io/badge/Terraform-844FBA?logo=terraform&logoColor=white) | Infrastructure as Code |
+| ![S3](https://img.shields.io/badge/Amazon_S3-569A31?logo=amazons3&logoColor=white) | Website storage |
+| ![CloudFront](https://img.shields.io/badge/CloudFront-8C4FFF?logo=amazoncloudfront&logoColor=white) | Content delivery |
+| ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?logo=githubactions&logoColor=white) | CI/CD automation |
+| ![OIDC](https://img.shields.io/badge/OIDC-Authentication-blue) | Secure AWS authentication |
+| ![Checkov](https://img.shields.io/badge/Checkov-Security_Scanning-6C3FC5) | Terraform security scanning |
+| ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white) | Website development |
+| ![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white) | Version control |
 
-## 🏗️ Architecture
+## Architecture
+
+The project uses Terraform to provision the AWS infrastructure and GitHub Actions to automate security scanning and website deployment.
 
 ```mermaid
 flowchart TD
-    A["👩‍💻 Developer"] --> B["GitHub Repository"]
+    A["Developer"] --> B["GitHub Repository"]
     B --> C["GitHub Actions"]
-    C --> D["OIDC Authentication"]
-    D --> E["AWS IAM Role"]
-    E --> F["Amazon S3"]
-    F --> G["Amazon CloudFront"]
-    G --> H["🌍 Website Visitors"]
+    C --> D["Checkov Security Scan"]
+    D --> E["OIDC Authentication"]
+    E --> F["AWS IAM Role"]
+    F --> G["Amazon S3"]
+    G --> H["Amazon CloudFront"]
+    H --> I["Website Visitors"]
 ```
 
-### How it works
+### How It Works
 
 1. A developer updates the website code.
-2. Changes are pushed to GitHub.
-3. GitHub Actions starts the deployment workflow.
-4. GitHub authenticates with AWS using OIDC.
-5. The updated website is uploaded to Amazon S3.
-6. CloudFront cache is invalidated.
-7. Visitors receive the updated website.
+2. Changes are pushed to the GitHub repository.
+3. GitHub Actions starts the workflow.
+4. Checkov scans the Terraform configuration for security misconfigurations.
+5. GitHub Actions authenticates with AWS using OIDC.
+6. The updated website is uploaded to Amazon S3.
+7. CloudFront cache is invalidated.
+8. Visitors receive the updated website.
 
-## 🎯 Project Objectives
+## Project Objectives
 
 - Understand Infrastructure as Code.
 - Provision AWS infrastructure using Terraform.
@@ -71,7 +69,7 @@ flowchart TD
 - Establish secure AWS authentication using OIDC.
 - Introduce DevSecOps through infrastructure security scanning.
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 aws-devops-demo/
@@ -79,8 +77,6 @@ aws-devops-demo/
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml
-│
-├── app/
 │
 ├── terraform/
 │   ├── main.tf
@@ -96,7 +92,7 @@ aws-devops-demo/
 └── Readme.MD
 ```
 
-## ⚙️ Prerequisites
+## Prerequisites
 
 Before starting, install the following:
 
@@ -115,9 +111,9 @@ aws --version
 git --version
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/paulaali/aws-devops-demo-CI-CD.git
@@ -131,25 +127,27 @@ cd aws-devops-demo-CI-CD
 
 ### 2. Configure AWS
 
-Configure your AWS CLI credentials:
+For local Terraform deployment, configure your AWS CLI credentials using an appropriate AWS authentication method.
+
+For this demonstration:
 
 ```bash
 aws configure
 ```
 
-Use the AWS region:
+Set the AWS region to:
 
 ```text
 us-east-1
 ```
 
-Verify your identity:
+Verify your AWS identity:
 
 ```bash
 aws sts get-caller-identity
 ```
 
-**Security reminder:** Never commit AWS credentials or secret keys to GitHub.
+**Security reminder:** Never commit AWS credentials, access keys or secret keys to GitHub.
 
 ### 3. Initialize Terraform
 
@@ -177,15 +175,15 @@ Validate the configuration:
 terraform validate
 ```
 
-### 4. Review and deploy infrastructure
+### 4. Review and Deploy Infrastructure
 
-Preview the changes:
+Preview the infrastructure changes:
 
 ```bash
 terraform plan
 ```
 
-Deploy:
+Deploy the infrastructure:
 
 ```bash
 terraform apply
@@ -193,7 +191,7 @@ terraform apply
 
 Review the proposed changes and confirm when prompted.
 
-### 5. Retrieve the website URL
+### 5. Retrieve the Website URL
 
 ```bash
 terraform output cloudfront_url
@@ -201,7 +199,9 @@ terraform output cloudfront_url
 
 Open the returned CloudFront URL in your browser.
 
-## 🔄 CI/CD Pipeline
+**Note:** The demonstration uses an account-specific S3 bucket name. When deploying your own copy, ensure the bucket name is globally unique and update the corresponding workflow configuration.
+
+## CI/CD Pipeline
 
 The GitHub Actions workflow is located at:
 
@@ -209,36 +209,63 @@ The GitHub Actions workflow is located at:
 .github/workflows/deploy.yml
 ```
 
-The workflow automates the following:
+The pipeline is triggered automatically when changes are pushed to the `main` branch and the configured file paths are modified. It can also be started manually using the GitHub Actions interface.
 
-| Stage              | Action                                    |
-| ------------------ | ----------------------------------------- |
-| Checkout           | Retrieves the repository code             |
-| Authentication     | Connects GitHub Actions to AWS using OIDC |
-| Deployment         | Uploads the website to S3                 |
-| Cache invalidation | Refreshes CloudFront content              |
+### Pipeline Stages
 
-### 🔐 AWS OIDC Authentication
+| Stage | Action |
+|---|---|
+| Checkout | Retrieves repository code |
+| Security Scan | Runs Checkov against Terraform configurations |
+| Authentication | Connects GitHub Actions to AWS using OIDC |
+| Identity Verification | Confirms the authenticated AWS identity |
+| Deployment | Uploads the website to S3 |
+| Cache Invalidation | Refreshes CloudFront content |
+
+### Infrastructure Security Scanning with Checkov
+
+[Checkov](https://www.checkov.io/) is used to scan Terraform configurations for potential security misconfigurations.
+
+The workflow installs Checkov and scans the Terraform directory:
+
+```bash
+pip install checkov
+checkov -d terraform --soft-fail
+```
+
+The security scan runs before the deployment job.
+
+**Important:** The current demonstration uses `--soft-fail`, which reports findings without blocking deployment. This allows the team to review and address findings before enforcing stricter security checks.
+
+### AWS OIDC Authentication
 
 OpenID Connect (OIDC) allows GitHub Actions to authenticate with AWS without storing long-lived AWS access keys in GitHub.
 
-The workflow obtains temporary credentials through an IAM role with restricted permissions.
+The process works as follows:
 
-Required GitHub repository secret:
+1. GitHub Actions requests an OIDC token.
+2. AWS validates the token against the configured GitHub identity provider.
+3. AWS checks the IAM role's trust relationship.
+4. GitHub Actions assumes the IAM role and receives temporary AWS credentials.
+5. The workflow uses those credentials to deploy the website.
+
+The GitHub repository requires the following Actions secret:
 
 ```text
 AWS_ROLE_ARN
 ```
 
-The IAM role should trust only the intended GitHub repository and branch.
+The IAM role should trust only the intended GitHub repository and branch and have the minimum permissions required for deployment.
 
-## 🧪 Test the CI/CD Pipeline
+## Test the CI/CD Pipeline
 
-Make a small change to `index.html`.
+To test automatic deployment:
 
-For example, update the website heading.
+1. Make a small change to `index.html`.
+2. Save the file.
+3. Commit and push the changes to the `main` branch.
 
-Then run:
+Run:
 
 ```bash
 git add index.html
@@ -248,26 +275,32 @@ git push origin main
 
 Open the **Actions** tab in GitHub to monitor the workflow.
 
-Once deployment succeeds, refresh your CloudFront website URL to see the changes.
+A successful run should show:
 
-## 🛡️ Security Practices
+- Terraform Security Scan: Passed
+- Deploy Website: Passed
+
+Once deployment succeeds, refresh your CloudFront website URL to see the updated content.
+
+## Security Practices
 
 This project incorporates the following security measures:
 
-- S3 Block Public Access.
+- Amazon S3 Block Public Access.
 - S3 server-side encryption.
 - S3 bucket versioning.
-- CloudFront Origin Access Control.
+- CloudFront Origin Access Control (OAC).
 - Restricted S3 bucket policy.
-- IAM least-privilege permissions.
-- OIDC authentication.
-- Terraform security scanning with Checkov (planned integration).
+- IAM least-privilege deployment permissions.
+- GitHub Actions OIDC authentication.
+- Temporary AWS credentials instead of long-lived GitHub access keys.
+- Terraform security scanning with Checkov.
 
-## 🧹 Cleanup
+## Cleanup
 
 To avoid unnecessary AWS charges, remove the resources when the demonstration is complete.
 
-Before running `terraform destroy`, empty the S3 bucket, including object versions and delete markers, because versioning is enabled and `force_destroy` is disabled.
+**Important:** S3 versioning is enabled, and `force_destroy` is disabled. Empty the bucket, including object versions and delete markers, before destroying the Terraform-managed infrastructure.
 
 Then run:
 
@@ -277,7 +310,9 @@ terraform destroy
 
 Review the proposed deletions before confirming.
 
-## 📚 Learning Resources
+The GitHub OIDC provider and deployment IAM role were configured separately in the AWS Console for this demonstration. They must also be reviewed and removed manually if no longer required.
+
+## Learning Resources
 
 - [AWS Documentation](https://docs.aws.amazon.com/)
 - [Terraform Documentation](https://developer.hashicorp.com/terraform/docs)
@@ -287,12 +322,12 @@ Review the proposed deletions before confirming.
 
 ---
 
-\<div align="center">
-
-### ☁️ Learn. Build. Automate. Deploy.
+## Project Information
 
 **AWS Student Community Day | Pre-Event Session 3**
 
+**Topic:** Infrastructure as Code and CI/CD
+
 Built for learning, experimentation and practical cloud engineering.
 
-\</div>
+**Learn. Build. Automate. Deploy.**
